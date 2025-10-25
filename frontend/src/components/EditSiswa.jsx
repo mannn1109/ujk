@@ -21,7 +21,7 @@ function EditSiswa() {
             const response = await axios.get(`http://localhost:3000/siswa/${id}`)
             setNama(response.data.siswa.nama)
             setAlamat(response.data.siswa.alamat)
-            setTglLahir(response.data.siswa.tglLahir)
+            setTglLahir(new Date(response.data.siswa.tglLahir).toISOString().split('T')[0])
             setJurusan(response.data.siswa.jurusan)
         } catch (error) {
             console.log(error)
@@ -35,7 +35,7 @@ function EditSiswa() {
             await axios.put(`http://localhost:3000/siswa/${id}`, {
                 nama,
                 alamat,
-                tglLahir,
+                tglLahir: new Date(tglLahir),
                 jurusan
             });
             navigate('/')
@@ -53,7 +53,7 @@ function EditSiswa() {
             <Link to={'/'}>
                 <FaArrowLeft className='cursor-pointer'/>
             </Link>
-            <h1 className='text-2xl font-semibold'>Tambah Siswa</h1>
+            <h1 className='text-2xl font-semibold'>Edit Siswa</h1>
             <div className="w-6"></div>
         </div>
 

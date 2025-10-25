@@ -15,12 +15,15 @@ function DataSiswa() {
     }
 
     const deleteSiswa = async (id) => {
-        try {
-            await axios.delete(`http://localhost:3000/siswa/${id}`);
-            getAllSiswa();
-        } catch (error) {
-            console.log(error)
-            alert(error.response.data.message)
+        const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus siswa ini?");
+        if (confirmDelete) {
+            try {
+                await axios.delete(`http://localhost:3000/siswa/${id}`);
+                getAllSiswa();
+            } catch (error) {
+                console.log(error)
+                alert(error.response.data.message)
+            }
         }
     }
 
